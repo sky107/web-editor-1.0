@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>CLUB19-Web Editor-1.0</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
+        #html-code,
+        #css-code,
+        #js-code {
+            resize: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar" style="border: 1px solid #eee; box-shadow: 2px 2px #ccc;">
+        <div class="group" role="group">
+            <span id="html-btn" type="button" class="bt bt-default pl-2 pr-2 pt-1 pb-1"
+                style="color:blue; background-color:#eee;border:none;">HTML</span>
+            <span id="css-btn" type="button" class="bt bt-default pl-2 pr-2 pt-1 pb-1"
+                style="color:blue; background-color:#eee;border:none;">CSS</span>
+            <span id="js-btn" type="button" class="bt bt-default pl-2 pr-2 pt-1 pb-1"
+                style="color:blue; background-color:#eee;border:none;">Javascript</span>
+        </div>
+        <div> WEB-EDITOR 1.0</div>
+        <div> <small>initiative of</small> UEC-CLUB19</div>
+    </div>
+    <div style="display:flex;">
+        <main style="display: flex; height:90vh;width:30vw;flex-direction:column;">
+            <textarea name="html-code" id="html-code" cols="20" rows="100" placeholder="HTML Code Here"></textarea>
+            <textarea name="css-code" id="css-code" cols="20" rows="100" placeholder="CSS Code Here"></textarea>
+            <textarea name="js-code" id="js-code" cols="20" rows="100" placeholder="Javascript Code Here"></textarea>
+        </main>
+        <div>
+            <iframe src="" frameborder="0" id="output"></iframe>
+        </div>
+    </div>
+    <div class="footer" style="background-color:black; color:white; position: fixed;bottom:0px;width:100vw;">
+        <small> <span class="pr-3 pt-0">Feedback </span> <span class="pr-3 pt-0">Terms and conditions</span> <span
+                class="pr-3 pt-0">All rights reserved with UEC-CLUB19 </span> <span class="pr-3 pt-0">UEC Ujjain M.P
+            </span> <span class="pr-3">Created by Siddharth Kumar Yadav </span><span class="pr-3"> on 30-12-2020 </span>
+            <span>0701CS191059</span></small>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script>
+        function fx(fg, fgcss, fgjs) {
+
+            if (fg == false && fgcss == false && fgjs == false)
+                $('#output').css({
+                    "height": "88vh",
+                    "width": "100vw",
+                    "z-index": "3"
+                });
+            else
+                $('#output').css({
+                    "height": "auto",
+                    "width": "auto",
+                    "z-index": "3"
+                });
+
+
+        }
+        let fg = true,
+            fgcss = true,
+            fgjs = true;
+        $('#html-btn').click(() => {
+            $('#html-code').toggle();
+            if (fg) {
+                $('#html-btn').css("color", "black");
+                $('#html-btn').css("background", "white");
+            } else {
+                $('#html-btn').css("color", "blue");
+                $('#html-btn').css("background", "#eee");
+            }
+
+            fg = !fg
+            fx(fg, fgcss, fgjs);
+        })
+        $('#css-btn').click(() => {
+            $('#css-code').toggle();
+            if (fgcss) {
+                $('#css-btn').css("color", "black");
+                $('#css-btn').css("background", "white");
+            } else {
+                $('#css-btn').css("color", "blue");
+                $('#css-btn').css("background", "#eee");
+            }
+
+            fgcss = !fgcss;
+            fx(fg, fgcss, fgjs);
+        })
+        $('#js-btn').click(() => {
+            $('#js-code').toggle();
+            if (fgjs) {
+                $('#js-btn').css("color", "black");
+                $('#js-btn').css("background", "white");
+            } else {
+                $('#js-btn').css("color", "blue");
+                $('#js-btn').css("background", "#eee");
+            }
+
+            fgjs = !fgjs;
+            fx(fg, fgcss, fgjs);
+        })
+
+        run();
+
+        function run() {
+            let htmlCode = document.querySelector("#html-code").value;
+            let csssCode = document.querySelector("#css-code").value;
+            let cssCode = "<style>" + document.querySelector("#css-code").value + "</style>";
+            let jsCode = document.querySelector("#js-code").value;
+            let output = document.querySelector("#output");
+            //console.log(htmlCode,cssCode,jsCode,output);
+            output.contentDocument.body.innerHTML = htmlCode + cssCode;
+            output.contentWindow.eval(jsCode);
+            if (htmlCode + csssCode + jsCode === "") {
+                output.contentDocument.body.innerHTML =
+                    "<h2 style='color:grey;opacity:0.5;'>Talk is Cheap , Show me the Code</h4>";
+            }
+        }
+        document.querySelector("#html-code").addEventListener("keyup", run);
+        document.querySelector("#css-code").addEventListener("keyup", run);
+        document.querySelector("#js-code").addEventListener("keyup", run);
+    </script>
+</body>
+
+</html>
